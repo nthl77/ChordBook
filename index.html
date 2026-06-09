@@ -174,6 +174,89 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
 #btn-reset-cancel { background:none; border:1px solid var(--c3) !important; padding:10px 28px; color:var(--c4); font-size:13px; font-weight:700; }
 
 
+/* COURS PRO */
+#btn-cours { background:linear-gradient(135deg,#2a9d8f,#4895ef); border:none !important; padding:10px 22px; color:#fff; font-size:13px; font-weight:800; letter-spacing:0.3px; position:relative; overflow:hidden; }
+#btn-cours::after { content:'PRO'; position:absolute; top:4px; right:6px; font-size:7px; font-weight:900; background:rgba(255,255,255,0.25); border-radius:999px; padding:1px 5px; letter-spacing:1px; }
+#cours-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--c1); z-index:300; flex-direction:column; overflow:hidden; }
+#cours-overlay.open { display:flex; animation:fadeIn 0.25s ease; }
+#cours-header { padding:16px 18px 12px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.05); flex-shrink:0; background:var(--c2); }
+#btn-close-cours { background:none; border:none !important; color:var(--c5); padding:4px 8px; flex-shrink:0; }
+#cours-header-title { flex:1; font-size:18px; font-weight:800; color:var(--c6); }
+.pro-badge { background:linear-gradient(135deg,#2a9d8f,#4895ef); border-radius:999px; padding:3px 10px; font-size:9px; font-weight:900; color:#fff; letter-spacing:1.5px; text-transform:uppercase; }
+#cours-tabs { display:flex; gap:0; padding:12px 16px 0; flex-shrink:0; }
+.cours-tab { background:none; border:none !important; border-radius:0 !important; padding:8px 16px; font-size:12px; font-weight:700; color:var(--c4); border-bottom:2px solid transparent !important; cursor:pointer; }
+.cours-tab.active { color:var(--c6); border-bottom:2px solid var(--c6) !important; }
+#cours-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:16px; display:flex; flex-direction:column; gap:12px; }
+#cours-body::-webkit-scrollbar { width:0; }
+.cours-section-title { font-size:9px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-top:4px; margin-bottom:2px; padding:0 4px; }
+.cours-card { background:var(--c2); border-radius:20px; border:1px solid var(--c3); overflow:hidden; cursor:pointer; transition:border-color 0.2s; }
+.cours-card:hover,.cours-card:active { border-color:var(--c5); }
+.cours-card.locked { opacity:1; }
+.cours-card-top { padding:16px 18px 12px; display:flex; align-items:flex-start; gap:14px; }
+.cours-card-emoji { font-size:28px; line-height:1; flex-shrink:0; margin-top:2px; }
+.cours-card-info { flex:1; min-width:0; }
+.cours-card-label { font-size:8px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+.cours-card-title { font-size:15px; font-weight:800; color:var(--c6); margin-bottom:4px; }
+.cours-card-desc { font-size:11px; color:var(--c5); line-height:1.6; }
+.cours-card-footer { padding:10px 18px 14px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(255,255,255,0.04); }
+.cours-duration { font-size:10px; color:var(--c4); font-weight:600; display:flex; align-items:center; gap:4px; }
+.cours-lock-badge { background:var(--c3); border-radius:999px; padding:4px 12px; font-size:10px; font-weight:800; color:var(--c4); display:flex; align-items:center; gap:5px; }
+.cours-free-badge { background:rgba(42,157,143,0.15); border-radius:999px; padding:4px 12px; font-size:10px; font-weight:800; color:#2a9d8f; }
+.cours-done-badge { background:rgba(87,204,153,0.15); border-radius:999px; padding:4px 12px; font-size:10px; font-weight:800; color:#57cc99; }
+
+/* COURS READER */
+#reader-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--c1); z-index:400; flex-direction:column; overflow:hidden; }
+#reader-overlay.open { display:flex; animation:fadeIn 0.2s ease; }
+#reader-header { padding:14px 18px; display:flex; align-items:center; gap:10px; background:var(--c2); border-bottom:1px solid rgba(255,255,255,0.05); flex-shrink:0; }
+#btn-close-reader { background:none; border:none !important; color:var(--c5); padding:4px 8px; flex-shrink:0; }
+#reader-title { flex:1; font-size:15px; font-weight:800; color:var(--c6); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+#reader-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:20px 20px 40px; }
+#reader-body::-webkit-scrollbar { width:0; }
+.reader-hero { font-size:48px; text-align:center; margin-bottom:16px; }
+.reader-h1 { font-size:22px; font-weight:800; color:var(--c6); margin-bottom:6px; }
+.reader-sub { font-size:12px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; font-weight:600; }
+.reader-p { font-size:14px; color:var(--c5); line-height:1.9; margin-bottom:14px; }
+.reader-h2 { font-size:15px; font-weight:800; color:var(--c6); margin:20px 0 8px; }
+.reader-chord-row { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 16px; }
+.reader-chord { background:var(--c2); border:1px solid var(--c3); border-radius:999px; padding:6px 16px; font-size:13px; font-weight:700; color:var(--c6); }
+.reader-chord.highlight { background:rgba(42,157,143,0.15); border-color:#2a9d8f; color:#2a9d8f; }
+.reader-tip { background:var(--c2); border-left:3px solid #2a9d8f; border-radius:0 16px 16px 0; padding:12px 16px; margin:14px 0; }
+.reader-tip-label { font-size:9px; color:#2a9d8f; letter-spacing:2px; text-transform:uppercase; font-weight:800; margin-bottom:4px; }
+.reader-tip p { font-size:13px; color:var(--c5); line-height:1.7; margin:0; }
+.reader-diagram { background:var(--c2); border:1px solid var(--c3); border-radius:16px; padding:16px; margin:14px 0; overflow-x:auto; }
+.reader-diagram-title { font-size:10px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:12px; }
+.reader-prog { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.reader-prog-chord { background:var(--c1); border:1px solid var(--c3); border-radius:12px; padding:8px 14px; font-size:14px; font-weight:800; color:var(--c6); text-align:center; min-width:48px; }
+.reader-prog-arrow { color:var(--c4); font-size:14px; }
+.reader-footer { margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; align-items:center; gap:10px; }
+#btn-mark-done { background:linear-gradient(135deg,#2a9d8f,#4895ef); border:none !important; padding:14px 40px; color:#fff; font-size:15px; font-weight:800; }
+#btn-import-prog { background:none; border:1px solid var(--c3) !important; padding:10px 28px; color:var(--c5); font-size:12px; font-weight:700; }
+
+/* PAYWALL */
+#paywall-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(6,20,24,0.96); z-index:500; align-items:center; justify-content:center; padding:20px; }
+#paywall-overlay.open { display:flex; animation:fadeIn 0.3s ease; }
+#paywall-panel { background:var(--c2); border-radius:28px; width:100%; max-width:340px; border:1px solid var(--c3); overflow:hidden; animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.paywall-top { padding:32px 28px 20px; text-align:center; }
+.paywall-gradient-badge { display:inline-flex; background:linear-gradient(135deg,#2a9d8f,#4895ef); border-radius:999px; padding:6px 20px; font-size:10px; font-weight:900; color:#fff; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px; }
+.paywall-title { font-size:22px; font-weight:800; color:var(--c6); margin-bottom:8px; }
+.paywall-desc { font-size:13px; color:var(--c5); line-height:1.7; margin-bottom:0; }
+.paywall-features { padding:0 28px 20px; display:flex; flex-direction:column; gap:8px; }
+.paywall-feature { display:flex; align-items:center; gap:10px; font-size:13px; color:var(--c5); }
+.paywall-feature-icon { font-size:16px; flex-shrink:0; }
+.paywall-price-row { padding:16px 28px; background:rgba(255,255,255,0.03); display:flex; align-items:center; justify-content:space-between; }
+.paywall-price { font-size:28px; font-weight:900; color:var(--c6); }
+.paywall-price-sub { font-size:11px; color:var(--c4); line-height:1.4; }
+.paywall-actions { padding:16px 28px 28px; display:flex; flex-direction:column; gap:10px; }
+#btn-paywall-buy { background:linear-gradient(135deg,#2a9d8f,#4895ef); border:none !important; padding:16px 32px; color:#fff; font-size:15px; font-weight:800; width:100% !important; border-radius:16px !important; }
+#btn-paywall-code { background:none; border:1px solid var(--c3) !important; padding:11px 28px; color:var(--c5); font-size:12px; font-weight:700; width:100% !important; border-radius:999px !important; }
+#btn-paywall-close { background:none; border:none !important; color:var(--c4); font-size:12px; font-weight:600; }
+#paywall-code-row { display:none; flex-direction:column; gap:8px; margin-top:4px; }
+#paywall-code-row.open { display:flex; }
+#paywall-code-input { width:100%; background:var(--c1); border:1px solid var(--c3); border-radius:999px; padding:12px 20px; font-size:14px; font-weight:700; color:var(--c6); outline:none; font-family:var(--f); text-align:center; letter-spacing:4px; text-transform:uppercase; }
+#paywall-code-input:focus { border-color:var(--c5); }
+#btn-paywall-validate { background:var(--c6); border:none !important; padding:12px 28px; color:var(--c1); font-size:13px; font-weight:800; }
+#paywall-code-error { font-size:11px; color:#e05555; text-align:center; display:none; }
+
 /* ONBOARDING */
 #onboarding-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(6,20,24,0.96); z-index:400; align-items:center; justify-content:center; padding:20px; }
 #onboarding-overlay.open { display:flex; }
@@ -312,6 +395,7 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
     <div id="notes-list"></div>
     <div id="sidebar-foot">
       <button id="btn-new">+</button>
+      <button id="btn-cours">🎓 Cours</button>
       <button id="btn-search-chords" onclick="showComingSoon()">Trouver les accords</button>
     </div>
   </div>
@@ -414,6 +498,62 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
   </div>
 
   <!-- TUTO -->
+</div>
+
+<!-- COURS OVERLAY -->
+<div id="cours-overlay">
+  <div id="cours-header">
+    <button id="btn-close-cours"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div id="cours-header-title">Cours</div>
+    <div class="pro-badge">PRO</div>
+  </div>
+  <div id="cours-tabs">
+    <button class="cours-tab active" data-tab="all">Tous</button>
+    <button class="cours-tab" data-tab="theorie">Théorie</button>
+    <button class="cours-tab" data-tab="progressions">Progressions</button>
+    <button class="cours-tab" data-tab="styles">Styles</button>
+  </div>
+  <div id="cours-body"></div>
+</div>
+
+<!-- READER OVERLAY -->
+<div id="reader-overlay">
+  <div id="reader-header">
+    <button id="btn-close-reader"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div id="reader-title"></div>
+  </div>
+  <div id="reader-body"></div>
+</div>
+
+<!-- PAYWALL OVERLAY -->
+<div id="paywall-overlay">
+  <div id="paywall-panel">
+    <div class="paywall-top">
+      <div class="paywall-gradient-badge">ChordBook PRO</div>
+      <div class="paywall-title">Débloquez tous les cours</div>
+      <div class="paywall-desc">Théorie, progressions, styles musicaux — tout ce qu'il faut pour progresser vraiment.</div>
+    </div>
+    <div class="paywall-features">
+      <div class="paywall-feature"><span class="paywall-feature-icon">🎼</span>15+ fiches de cours détaillées</div>
+      <div class="paywall-feature"><span class="paywall-feature-icon">🎸</span>Progressions par style (Jazz, Pop, Blues...)</div>
+      <div class="paywall-feature"><span class="paywall-feature-icon">🧠</span>Théorie musicale essentielle</div>
+      <div class="paywall-feature"><span class="paywall-feature-icon">📲</span>Importer les accords directement</div>
+    </div>
+    <div class="paywall-price-row">
+      <div class="paywall-price">4,99 €</div>
+      <div class="paywall-price-sub">Accès à vie<br/>Paiement unique</div>
+    </div>
+    <div class="paywall-actions">
+      <button id="btn-paywall-buy">Acheter l'accès PRO →</button>
+      <button id="btn-paywall-code">J'ai déjà un code</button>
+      <div id="paywall-code-row">
+        <input id="paywall-code-input" placeholder="CODE" maxlength="12" autocomplete="off" autocorrect="off" spellcheck="false"/>
+        <div id="paywall-code-error">Code invalide. Vérifiez et réessayez.</div>
+        <button id="btn-paywall-validate">Valider</button>
+      </div>
+      <button id="btn-paywall-close">Pas maintenant</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -957,7 +1097,345 @@ document.addEventListener("click",()=>{ctxMenu.classList.remove("open");contextN
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){ctxMenu.classList.remove("open");contextNoteId=null;}});
 
 loadData();updateNotation();render();updateWelcome();showSplash();checkPrenom();checkFirstLaunch();
+checkOwnerFromURL();
 setTimeout(()=>checkImportFromURL(),2600);
+
+// ─── COURS PRO ────────────────────────────────────────────────────────────────
+
+const PRO_CODE = "CHORDPRO";
+
+const COURS_DATA = [
+  // ── GRATUITS ──
+  {
+    id:"c01", free:true, cat:"theorie",
+    emoji:"🎵", label:"Théorie · Bases",
+    title:"Les 7 notes de la gamme",
+    desc:"Comprendre Do Ré Mi Fa Sol La Si et leur équivalent international.",
+    duration:"3 min",
+    content:[
+      {type:"hero",text:"🎵"},
+      {type:"h1",text:"Les 7 notes de la gamme"},
+      {type:"sub",text:"Théorie · Débutant · 3 min"},
+      {type:"p",text:"La musique occidentale repose sur 7 notes fondamentales. En notation latine (utilisée en France) : Do, Ré, Mi, Fa, Sol, La, Si. En notation internationale : C, D, E, F, G, A, B."},
+      {type:"h2",text:"Correspondances"},
+      {type:"chords",chords:["Do = C","Ré = D","Mi = E","Fa = F","Sol = G","La = A","Si = B"]},
+      {type:"tip",label:"Le saviez-vous ?",text:"La notation latine (Do Ré Mi) vient du XIe siècle, inventée par le moine Guido d'Arezzo pour faciliter l'apprentissage du chant."},
+      {type:"h2",text:"Les demi-tons"},
+      {type:"p",text:"Entre certaines notes, il existe des demi-tons représentés par des dièses (#) ou des bémols (b). Par exemple, entre Do et Ré se trouve Do# (ou Réb). Il n'y a pas de demi-ton entre Mi-Fa et Si-Do."},
+      {type:"chords",chords:["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"],highlight:["C","D","E","F","G","A","B"]},
+      {type:"tip",label:"À retenir",text:"Le piano est le meilleur outil visuel pour comprendre les demi-tons : les touches noires sont les dièses/bémols, les blanches sont les notes naturelles."},
+    ]
+  },
+  {
+    id:"c02", free:true, cat:"progressions",
+    emoji:"🔁", label:"Progression · Pop",
+    title:"La progression I–V–vi–IV",
+    desc:"La suite d'accords la plus populaire au monde. Des milliers de chansons l'utilisent.",
+    duration:"5 min",
+    prog:["C","G","Am","F"],
+    content:[
+      {type:"hero",text:"🔁"},
+      {type:"h1",text:"La progression I–V–vi–IV"},
+      {type:"sub",text:"Progressions · Débutant · 5 min"},
+      {type:"p",text:"Cette progression est littéralement partout : Let Her Go, No Woman No Cry, Don't Stop Believin', Someone Like You... Elle fonctionne car elle crée un cycle harmonique satisfaisant qui revient naturellement au point de départ."},
+      {type:"h2",text:"En Do majeur (C)"},
+      {type:"prog",chords:["C","G","Am","F"]},
+      {type:"p",text:"Chaque chiffre romain correspond à un degré de la gamme. I = accord construit sur la 1re note, V = 5e note, vi = 6e note (mineur), IV = 4e note."},
+      {type:"h2",text:"Transpositions courantes"},
+      {type:"diagram",title:"La même progression dans d'autres tonalités",rows:[
+        {key:"Sol (G)",chords:["G","D","Em","C"]},
+        {key:"Ré (D)",chords:["D","A","Bm","G"]},
+        {key:"La (A)",chords:["A","E","F#m","D"]},
+      ]},
+      {type:"tip",label:"Exercice",text:"Prenez cette progression en Do et jouez-la en boucle. Essayez de reconnaître des chansons que vous connaissez. Vous serez surpris du résultat !"},
+    ]
+  },
+  // ── PRO ──
+  {
+    id:"c03", free:false, cat:"theorie",
+    emoji:"🎼", label:"Théorie · Intermédiaire",
+    title:"Construire une gamme majeure",
+    desc:"Comprendre la structure Ton-Ton-Demi-ton pour créer n'importe quelle gamme.",
+    duration:"6 min",
+    content:[
+      {type:"hero",text:"🎼"},
+      {type:"h1",text:"Construire une gamme majeure"},
+      {type:"sub",text:"Théorie · Intermédiaire · 6 min"},
+      {type:"p",text:"Toutes les gammes majeures suivent la même formule d'intervalles : T – T – ½T – T – T – T – ½T (T = Ton, ½T = Demi-ton). En partant de n'importe quelle note, cette formule donne la gamme majeure correspondante."},
+      {type:"h2",text:"Exemple : Gamme de Sol (G)"},
+      {type:"chords",chords:["G","A","B","C","D","E","F#","G"],highlight:["G"]},
+      {type:"tip",label:"Astuce",text:"Mémorisez l'ordre des dièses : Fa Do Sol Ré La Mi Si. Chaque nouvelle tonalité ajoute un dièse dans cet ordre."},
+      {type:"h2",text:"Pourquoi c'est utile ?"},
+      {type:"p",text:"Connaître la gamme d'une tonalité vous dit quels accords sonnent bien ensemble. Les accords construits sur chaque degré de la gamme forment la palette harmonique naturelle du morceau."},
+    ]
+  },
+  {
+    id:"c04", free:false, cat:"theorie",
+    emoji:"🔗", label:"Théorie · Intermédiaire",
+    title:"Accords majeurs et mineurs",
+    desc:"La différence entre un accord majeur (joyeux) et mineur (mélancolique).",
+    duration:"5 min",
+    content:[
+      {type:"hero",text:"🔗"},
+      {type:"h1",text:"Majeurs vs Mineurs"},
+      {type:"sub",text:"Théorie · Intermédiaire · 5 min"},
+      {type:"p",text:"Un accord est formé de 3 notes minimum. La différence entre majeur et mineur ne tient qu'à une seule note : la tierce. Majeur = tierce à 4 demi-tons, Mineur = tierce à 3 demi-tons."},
+      {type:"h2",text:"Exemples"},
+      {type:"chords",chords:["C (Do-Mi-Sol)","Cm (Do-Mib-Sol)","G (Sol-Si-Ré)","Gm (Sol-Sib-Ré)"]},
+      {type:"tip",label:"À l'oreille",text:"Fermez les yeux et jouez un accord majeur, puis son équivalent mineur. Le majeur sonne 'lumineux', le mineur 'sombre' ou 'mélancolique'."},
+    ]
+  },
+  {
+    id:"c05", free:false, cat:"progressions",
+    emoji:"🎷", label:"Progression · Jazz",
+    title:"Le ii–V–I en Jazz",
+    desc:"La progression fondamentale du jazz. Indispensable pour comprendre l'harmonie jazz.",
+    duration:"7 min",
+    prog:["Dm7","G7","Cmaj7"],
+    content:[
+      {type:"hero",text:"🎷"},
+      {type:"h1",text:"Le ii–V–I Jazz"},
+      {type:"sub",text:"Jazz · Intermédiaire · 7 min"},
+      {type:"p",text:"Le ii–V–I est la progression la plus importante du jazz. Elle crée une résolution harmonique puissante et apparaît dans quasiment tous les standards jazz."},
+      {type:"h2",text:"En Do majeur"},
+      {type:"prog",chords:["Dm7","G7","Cmaj7"]},
+      {type:"p",text:"Dm7 = accord de 2e degré (ii), G7 = accord dominant du 5e degré (V), Cmaj7 = accord tonique du 1er degré (I). La tension créée par le G7 se résout naturellement sur le Cmaj7."},
+      {type:"tip",label:"Pour aller plus loin",text:"Essayez d'ajouter des extensions : Dm9, G13, Cmaj9. Plus vous empilez de notes, plus le son devient 'jazz'."},
+    ]
+  },
+  {
+    id:"c06", free:false, cat:"styles",
+    emoji:"🔵", label:"Style · Blues",
+    title:"Le Blues en 12 mesures",
+    desc:"La structure de base du blues. Comprendre les 3 accords fondamentaux.",
+    duration:"8 min",
+    prog:["A7","A7","A7","A7","D7","D7","A7","A7","E7","D7","A7","E7"],
+    content:[
+      {type:"hero",text:"🔵"},
+      {type:"h1",text:"Le Blues en 12 mesures"},
+      {type:"sub",text:"Blues · Intermédiaire · 8 min"},
+      {type:"p",text:"Le blues à 12 mesures est la structure la plus répandue de toute la musique populaire. Il repose sur 3 accords de dominante (7e) et une structure en 3 lignes de 4 mesures."},
+      {type:"h2",text:"Structure en La (A)"},
+      {type:"diagram",title:"12 mesures",rows:[
+        {key:"Mesures 1-4",chords:["A7","A7","A7","A7"]},
+        {key:"Mesures 5-8",chords:["D7","D7","A7","A7"]},
+        {key:"Mesures 9-12",chords:["E7","D7","A7","E7"]},
+      ]},
+      {type:"tip",label:"L'essentiel",text:"Le 'turnaround' (mesures 11-12 : A7 → E7) ramène la progression au début. C'est la signature du blues."},
+    ]
+  },
+  {
+    id:"c07", free:false, cat:"styles",
+    emoji:"🌿", label:"Style · Bossa Nova",
+    title:"L'harmonie Bossa Nova",
+    desc:"Accords enrichis et rythme syncopé. La douceur brésilienne en quelques accords.",
+    duration:"6 min",
+    prog:["Dmaj7","G#7","Gmaj7","C#7","F#m7","B7","Em7","A7"],
+    content:[
+      {type:"hero",text:"🌿"},
+      {type:"h1",text:"L'harmonie Bossa Nova"},
+      {type:"sub",text:"Bossa Nova · Avancé · 6 min"},
+      {type:"p",text:"La Bossa Nova est née au Brésil dans les années 50, fusion de samba et de jazz cool. Son harmonie est riche en accords de 7e, 9e et substitutions tritone."},
+      {type:"h2",text:"Progression typique"},
+      {type:"prog",chords:["Dmaj7","G#7","Gmaj7","C#7"]},
+      {type:"tip",label:"Caractéristique",text:"La substitution tritone (remplacer un accord dominant par celui à 3 tons de distance) est au cœur du son Bossa Nova. G7 → Db7, par exemple."},
+    ]
+  },
+  {
+    id:"c08", free:false, cat:"theorie",
+    emoji:"⚡", label:"Théorie · Avancé",
+    title:"Les accords de 7e",
+    desc:"Maj7, m7, 7 dominant — ajouter de la couleur à vos progressions.",
+    duration:"7 min",
+    content:[
+      {type:"hero",text:"⚡"},
+      {type:"h1",text:"Les accords de 7e"},
+      {type:"sub",text:"Théorie · Avancé · 7 min"},
+      {type:"p",text:"Un accord de 7e ajoute une 4e note à la triade de base. Il en existe 4 types principaux, chacun avec sa couleur sonore propre."},
+      {type:"h2",text:"Les 4 types"},
+      {type:"chords",chords:["Maj7 = accord majeur + tierce majeure","m7 = accord mineur + tierce mineure","7 (dom) = accord majeur + tierce mineure","m7b5 = accord dim + tierce mineure"]},
+      {type:"h2",text:"Exemples en Do"},
+      {type:"prog",chords:["Cmaj7","Cm7","C7","Cm7b5"]},
+      {type:"tip",label:"Usage",text:"Le 7 dominant crée de la tension qui se résout sur la tonique. C7 → F. Le Maj7 apporte une couleur douce et moderne, très utilisée en pop et R&B."},
+    ]
+  },
+];
+
+function isPro(){try{return localStorage.getItem("chordbook-pro")==="1";}catch{return false;}}
+function setPro(){try{localStorage.setItem("chordbook-pro","1");}catch{}}
+function isDone(id){try{const d=JSON.parse(localStorage.getItem("chordbook-done")||"{}");return !!d[id];}catch{return false;}}
+function markDone(id){try{const d=JSON.parse(localStorage.getItem("chordbook-done")||"{}");d[id]=1;localStorage.setItem("chordbook-done",JSON.stringify(d));}catch{}}
+let activeCoursTab="all";
+let activeLesson=null;
+
+function getFilteredCours(){
+  if(activeCoursTab==="all")return COURS_DATA;
+  return COURS_DATA.filter(c=>c.cat===activeCoursTab);
+}
+
+function renderCours(){
+  const body=document.getElementById("cours-body");
+  const filtered=getFilteredCours();
+  const pro=isPro();
+  const free=filtered.filter(c=>c.free);
+  const locked=filtered.filter(c=>!c.free);
+  let html="";
+  if(free.length){
+    html+=`<div class="cours-section-title">Gratuit</div>`;
+    html+=free.map(c=>coursCardHTML(c,pro)).join("");
+  }
+  if(locked.length){
+    if(!pro)html+=`<div class="cours-section-title">PRO — ${locked.length} cours</div>`;
+    else html+=`<div class="cours-section-title">PRO</div>`;
+    html+=locked.map(c=>coursCardHTML(c,pro)).join("");
+  }
+  body.innerHTML=html;
+  body.querySelectorAll(".cours-card").forEach(card=>{
+    card.addEventListener("click",()=>{
+      const id=card.dataset.id;
+      const lesson=COURS_DATA.find(c=>c.id===id);
+      if(!lesson)return;
+      if(!lesson.free&&!isPro()){showPaywall();return;}
+      openReader(lesson);
+    });
+  });
+}
+
+function coursCardHTML(c,pro){
+  const locked=!c.free&&!pro;
+  const done=isDone(c.id);
+  const badge=locked
+    ?`<div class="cours-lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> PRO</div>`
+    :done?`<div class="cours-done-badge">✓ Vu</div>`:`<div class="cours-free-badge">Gratuit</div>`;
+  return `<div class="cours-card${locked?' locked':''}" data-id="${c.id}">
+    <div class="cours-card-top">
+      <div class="cours-card-emoji">${c.emoji}</div>
+      <div class="cours-card-info">
+        <div class="cours-card-label">${c.label}${locked?'<span class="pro-badge" style="font-size:7px;padding:2px 7px;">PRO</span>':''}</div>
+        <div class="cours-card-title">${c.title}</div>
+        <div class="cours-card-desc">${c.desc}</div>
+      </div>
+    </div>
+    <div class="cours-card-footer">
+      <div class="cours-duration"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${c.duration}</div>
+      ${badge}
+    </div>
+  </div>`;
+}
+
+function openReader(lesson){
+  activeLesson=lesson;
+  document.getElementById("reader-title").textContent=lesson.title;
+  const body=document.getElementById("reader-body");
+  let html="";
+  for(const block of lesson.content){
+    if(block.type==="hero") html+=`<div class="reader-hero">${block.text}</div>`;
+    else if(block.type==="h1") html+=`<div class="reader-h1">${block.text}</div>`;
+    else if(block.type==="sub") html+=`<div class="reader-sub">${block.text}</div>`;
+    else if(block.type==="p") html+=`<div class="reader-p">${block.text}</div>`;
+    else if(block.type==="h2") html+=`<div class="reader-h2">${block.text}</div>`;
+    else if(block.type==="chords"){
+      html+=`<div class="reader-chord-row">${block.chords.map(c=>`<div class="reader-chord${(block.highlight||[]).includes(c)?' highlight':''}">${c}</div>`).join("")}</div>`;
+    }
+    else if(block.type==="prog"){
+      html+=`<div class="reader-diagram"><div class="reader-diagram-title">Progression</div><div class="reader-prog">${block.chords.map((c,i)=>`<div class="reader-prog-chord">${c}</div>${i<block.chords.length-1?'<div class="reader-prog-arrow">›</div>':''}`).join("")}</div></div>`;
+    }
+    else if(block.type==="tip"){
+      html+=`<div class="reader-tip"><div class="reader-tip-label">${block.label}</div><p>${block.text}</p></div>`;
+    }
+    else if(block.type==="diagram"){
+      const rows=(block.rows||[]).map(r=>`<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--c4);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:6px;">${r.key}</div><div class="reader-prog">${r.chords.map((c,i)=>`<div class="reader-prog-chord" style="font-size:12px;padding:6px 10px;">${c}</div>${i<r.chords.length-1?'<div class="reader-prog-arrow">›</div>':''}`).join("")}</div></div>`).join("");
+      html+=`<div class="reader-diagram"><div class="reader-diagram-title">${block.title}</div>${rows}</div>`;
+    }
+  }
+  // Footer
+  const hasProg=lesson.prog&&lesson.prog.length;
+  const done=isDone(lesson.id);
+  html+=`<div class="reader-footer">
+    <button id="btn-mark-done">${done?'✓ Cours terminé':'Marquer comme terminé'}</button>
+    ${hasProg?`<button id="btn-import-prog">Importer la progression dans mon carnet</button>`:''}
+  </div>`;
+  body.innerHTML=html;
+  document.getElementById("reader-overlay").classList.add("open");
+  body.scrollTop=0;
+
+  document.getElementById("btn-mark-done").addEventListener("click",()=>{
+    markDone(lesson.id);
+    document.getElementById("btn-mark-done").textContent="✓ Cours terminé";
+    renderCours();
+  });
+  if(hasProg){
+    document.getElementById("btn-import-prog").addEventListener("click",()=>{
+      const n={id:Date.now(),title:lesson.title,sections:[{id:Date.now()+1,name:"Progression",chords:lesson.prog}],date:new Date().toISOString()};
+      notes.unshift(n);activeId=n.id;saveData();render();
+      document.getElementById("reader-overlay").classList.remove("open");
+      document.getElementById("cours-overlay").classList.remove("open");
+      showMain();
+    });
+  }
+}
+
+function checkOwnerFromURL(){
+  try{
+    const params=new URLSearchParams(window.location.search);
+    const o=params.get('owner');
+    if(o&&o.toUpperCase()==="CBOWNER2026"){
+      setPro();
+      window.history.replaceState({},'',window.location.pathname);
+      const btn=document.getElementById("btn-cours");
+      if(btn){btn.textContent="🎓 Cours";} 
+    }
+  }catch{}
+}
+
+
+function hidePaywall(){document.getElementById("paywall-overlay").classList.remove("open");}
+
+// Cours events
+document.getElementById("btn-cours").addEventListener("click",()=>{
+  renderCours();
+  document.getElementById("cours-overlay").classList.add("open");
+});
+document.getElementById("btn-close-cours").addEventListener("click",()=>document.getElementById("cours-overlay").classList.remove("open"));
+document.getElementById("btn-close-reader").addEventListener("click",()=>document.getElementById("reader-overlay").classList.remove("open"));
+document.querySelectorAll(".cours-tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    activeCoursTab=tab.dataset.tab;
+    document.querySelectorAll(".cours-tab").forEach(t=>t.classList.remove("active"));
+    tab.classList.add("active");
+    renderCours();
+  });
+});
+
+// Paywall
+document.getElementById("btn-paywall-buy").addEventListener("click",()=>{
+  window.open("https://gumroad.com","_blank");
+});
+document.getElementById("btn-paywall-close").addEventListener("click",hidePaywall);
+document.getElementById("paywall-overlay").addEventListener("click",e=>{if(e.target===document.getElementById("paywall-overlay"))hidePaywall();});
+document.getElementById("btn-paywall-code").addEventListener("click",()=>{
+  document.getElementById("paywall-code-row").classList.toggle("open");
+  document.getElementById("paywall-code-input").focus();
+});
+document.getElementById("btn-paywall-validate").addEventListener("click",()=>{
+  const val=document.getElementById("paywall-code-input").value.trim().toUpperCase();
+  const errEl=document.getElementById("paywall-code-error");
+  if(val===PRO_CODE){
+    setPro();hidePaywall();
+    document.getElementById("paywall-code-input").value="";
+    document.getElementById("paywall-code-row").classList.remove("open");
+    errEl.style.display="none";
+    renderCours();
+    // Show success flash
+    const btn=document.getElementById("btn-cours");
+    const orig=btn.textContent;btn.textContent="🎓 PRO activé !";setTimeout(()=>{btn.textContent="🎓 Cours";},2000);
+  } else {
+    errEl.style.display="block";
+    document.getElementById("paywall-code-input").style.borderColor="#e05555";
+    setTimeout(()=>{document.getElementById("paywall-code-input").style.borderColor="";errEl.style.display="none";},2500);
+  }
+});
+document.getElementById("paywall-code-input").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("btn-paywall-validate").click();});
 </script>
 </body>
 </html>
