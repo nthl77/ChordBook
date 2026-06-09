@@ -176,7 +176,7 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
 
 /* COURS PRO */
 #btn-cours { background:linear-gradient(135deg,#2a9d8f,#4895ef); border:none !important; padding:10px 22px; color:#fff; font-size:13px; font-weight:800; letter-spacing:0.3px; position:relative; overflow:hidden; }
-#btn-cours::after { content:'PRO'; position:absolute; top:4px; right:6px; font-size:7px; font-weight:900; background:rgba(255,255,255,0.25); border-radius:999px; padding:1px 5px; letter-spacing:1px; }
+#btn-cours:not(.pro-active)::after { content:'PRO'; position:absolute; top:4px; right:6px; font-size:7px; font-weight:900; background:rgba(255,255,255,0.25); border-radius:999px; padding:1px 5px; letter-spacing:1px; }
 #cours-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--c1); z-index:300; flex-direction:column; overflow:hidden; }
 #cours-overlay.open { display:flex; animation:fadeIn 0.25s ease; }
 #cours-header { padding:16px 18px 12px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,0.05); flex-shrink:0; background:var(--c2); }
@@ -192,6 +192,9 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
 .cours-card { background:var(--c2); border-radius:20px; border:1px solid var(--c3); cursor:pointer; transition:border-color 0.2s; }
 .cours-card:hover,.cours-card:active { border-color:var(--c5); }
 .cours-card.locked { opacity:1; }
+.cours-card-banner { height:120px; border-radius:20px 20px 0 0; overflow:hidden; position:relative; display:flex; align-items:center; justify-content:center; border-bottom:1px solid rgba(255,255,255,0.05); }
+.cours-card-banner svg { width:100%; height:100%; }
+.cours-banner-pro-badge { position:absolute; top:10px; right:12px; background:linear-gradient(135deg,#2a9d8f,#4895ef); border-radius:999px; padding:3px 10px; font-size:8px; font-weight:900; color:#fff; letter-spacing:1.5px; text-transform:uppercase; }
 .cours-card-top { padding:14px 16px 12px; display:flex; align-items:flex-start; gap:14px; }
 .cours-card-emoji { font-size:28px; line-height:1; flex-shrink:0; margin-top:2px; }
 .cours-card-info { flex:1; min-width:0; }
@@ -210,13 +213,15 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
 #reader-header { padding:14px 18px; display:flex; align-items:center; gap:10px; background:var(--c2); border-bottom:1px solid rgba(255,255,255,0.05); flex-shrink:0; }
 #btn-close-reader { background:none; border:none !important; color:var(--c5); padding:4px 8px; flex-shrink:0; }
 #reader-title { flex:1; font-size:15px; font-weight:800; color:var(--c6); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:center; }
+#reader-progress { height:3px; background:var(--c3); flex-shrink:0; }
+#reader-progress-bar { height:100%; background:linear-gradient(90deg,#2a9d8f,#4895ef); width:0%; transition:width 0.3s ease; }
 #reader-body { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:20px 20px 40px; }
 #reader-body::-webkit-scrollbar { width:0; }
 .reader-hero { font-size:48px; text-align:center; margin-bottom:16px; }
-.reader-h1 { font-size:22px; font-weight:800; color:var(--c6); margin-bottom:6px; }
-.reader-sub { font-size:12px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; font-weight:600; }
+.reader-h1 { font-size:24px; font-weight:800; color:var(--c6); margin-bottom:6px; }
+.reader-sub { font-size:11px; color:var(--c4); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; font-weight:600; }
 .reader-p { font-size:14px; color:var(--c5); line-height:1.9; margin-bottom:14px; }
-.reader-h2 { font-size:15px; font-weight:800; color:var(--c6); margin:20px 0 8px; }
+.reader-h2 { font-size:13px; font-weight:800; color:#2a9d8f; margin:24px 0 8px; text-transform:uppercase; letter-spacing:1.5px; }
 .reader-chord-row { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 16px; }
 .reader-chord { background:var(--c2); border:1px solid var(--c3); border-radius:999px; padding:6px 16px; font-size:13px; font-weight:700; color:var(--c6); }
 .reader-chord.highlight { background:rgba(42,157,143,0.15); border-color:#2a9d8f; color:#2a9d8f; }
@@ -228,11 +233,29 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
 .reader-prog { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
 .reader-prog-chord { background:var(--c1); border:1px solid var(--c3); border-radius:12px; padding:8px 14px; font-size:14px; font-weight:800; color:var(--c6); text-align:center; min-width:48px; }
 .reader-prog-arrow { color:var(--c4); font-size:14px; }
-.reader-footer { margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; align-items:center; gap:10px; }
+.cp-info { font-size:22px; font-weight:800; color:var(--c6); margin-bottom:2px; min-height:28px; text-align:center; }
+.cp-sub { font-size:12px; color:var(--c5); margin-bottom:10px; min-height:16px; text-align:center; }
+.ap-btn { background:var(--c2); border:1px solid var(--c4); border-radius:999px; padding:6px 12px; font-size:11px; font-weight:700; color:var(--c5); cursor:pointer; transition:all 0.15s; font-family:var(--f); }
+.ap-btn.active { background:#2a9d8f; border-color:#2a9d8f; color:#fff; }
+.ap-btn.ap-demi { border-color:#e76f51; color:#e76f51; }
+.ap-btn.ap-demi.active { background:#e76f51; border-color:#e76f51; color:#fff; }
+.ap-info { font-size:14px; font-weight:800; color:var(--c6); margin-bottom:4px; min-height:20px; }
+.ap-sub { font-size:12px; color:var(--c5); margin-bottom:10px; line-height:1.6; min-height:32px; }
+.reader-piano-wrap { background:var(--c2); border:1px solid var(--c3); border-radius:16px; padding:10px 16px 16px; margin:10px 0; }
+.reader-piano-label { font-size:12px; color:#9BA4AB !important; letter-spacing:0.5px; font-weight:400; font-style:italic; margin-bottom:8px; }
+.piano-chord-btns { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+.piano-chord-btn { background:var(--c3); border:1px solid var(--c3); border-radius:999px; padding:6px 14px; font-size:12px; font-weight:700; color:var(--c5); cursor:pointer; transition:all 0.15s; font-family:var(--f); }
+.piano-chord-btn.active { background:#2a9d8f; border-color:#2a9d8f; color:#fff; }
+.piano-cname { font-size:16px; font-weight:800; color:var(--c6); margin-bottom:2px; min-height:22px; }
+.piano-cnotes { font-size:11px; color:var(--c5); margin-bottom:10px; letter-spacing:1px; text-transform:uppercase; min-height:16px; }
+.piano-degree { font-size:11px; color:var(--c4); margin-top:8px; letter-spacing:0.5px; }
+.reader-footer { padding-top:20px; border-top:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; align-items:center; gap:10px; }
 #btn-mark-done { background:linear-gradient(135deg,#2a9d8f,#4895ef); border:none !important; padding:14px 40px; color:#fff; font-size:15px; font-weight:800; }
 #btn-import-prog { background:none; border:1px solid var(--c3) !important; padding:10px 28px; color:var(--c5); font-size:12px; font-weight:700; }
 
-/* PAYWALL */
+/* TOAST */
+#toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--c6); color:var(--c1); padding:10px 20px; border-radius:999px; font-size:13px; font-weight:700; z-index:9999; opacity:0; transition:opacity 0.3s ease, transform 0.3s ease; pointer-events:none; white-space:nowrap; }
+#toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 #paywall-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(6,20,24,0.96); z-index:500; align-items:center; justify-content:center; padding:20px; }
 #paywall-overlay.open { display:flex; animation:fadeIn 0.3s ease; }
 #paywall-panel { background:var(--c2); border-radius:28px; width:100%; max-width:340px; border:1px solid var(--c3); overflow:hidden; animation:slideUp 0.3s cubic-bezier(0.34,1.56,0.64,1); }
@@ -301,6 +324,9 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
   #cours-overlay, #reader-overlay { left:0; right:0; transform:none; }
   #cours-body { max-width:660px; margin:0 auto; width:100%; }
   #reader-body { max-width:640px; margin:0 auto; width:100%; }
+  #notes-libres-area { max-width:640px; margin:0 auto; width:100%; }
+  #note-header { margin:16px 24px 0; }
+  #sections-area { padding:16px 24px 0; }
 }
 @media (max-width:700px) {
   #sidebar { position:absolute; top:0; left:0; bottom:0; right:0; width:100%; z-index:10; transition:transform 0.35s cubic-bezier(0.4,0,0.2,1); }
@@ -357,11 +383,6 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
     <div class="onboarding-footer">
       <div id="onboarding-dots">
         <div class="onboarding-dot active"></div>
-        <div class="onboarding-dot"></div>
-        <div class="onboarding-dot"></div>
-        <div class="onboarding-dot"></div>
-        <div class="onboarding-dot"></div>
-        <div class="onboarding-dot"></div>
       </div>
       <button id="btn-onboarding-next">Suivant</button>
       <button id="btn-onboarding-skip">Passer</button>
@@ -528,6 +549,7 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
     <button id="btn-close-reader"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
     <div id="reader-title"></div>
   </div>
+  <div id="reader-progress"><div id="reader-progress-bar"></div></div>
   <div id="reader-body"></div>
 </div>
 
@@ -562,7 +584,16 @@ button { display:inline-flex !important; align-items:center; justify-content:cen
   </div>
 </div>
 
+<div id="toast"></div>
+
 <script>
+function showToast(msg,duration=2500){
+  const t=document.getElementById("toast");
+  if(!t)return;
+  t.textContent=msg;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),duration);
+}
+
 const INT_TO_LAT={"C":"Do","D":"Ré","E":"Mi","F":"Fa","G":"Sol","A":"La","B":"Si"};
 const LAT_TO_INT={"do":"C","ré":"D","re":"D","mi":"E","fa":"F","sol":"G","la":"A","si":"B"};
 const CHORDS_INTL=["C","Cm","C#","C#m","Cmaj7","Cadd9","C7","D","Dm","D#","D#m","Dmaj7","Dsus4","D7","E","Em","Emaj7","E7","F","Fm","F#","F#m","Fmaj7","F7","G","Gm","G#","G#m","Gmaj7","Gsus4","G7","A","Am","A#","A#m","Amaj7","Asus2","A7","B","Bm","Bmaj7","B7","Bb","Bbm","Eb","Ebm","Ab","Abm","Db","Dbm","Gb","Gbm"];
@@ -745,7 +776,7 @@ function renderMain(){
     <div id="note-header">
       <div id="note-header-top">
         <button id="btn-back"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <div class="nh-lbl">Progression active</div>
+        <div class="nh-lbl"></div>
         <div style="display:flex;align-items:center;gap:8px;">${colorPickerHTML}</div>
       </div>
       <div class="nh-row">
@@ -940,9 +971,7 @@ document.getElementById("btn-onboarding-next").addEventListener("click",()=>{
   if(onboardingStep===0){
     const val=document.getElementById("onboarding-prenom-input").value.trim();
     if(!val){
-      // Secouer le champ si vide
       const inp=document.getElementById("onboarding-prenom-input");
-      inp.style.borderColor='#e05555 !important';
       inp.style.animation='shake 0.3s ease';
       inp.focus();
       setTimeout(()=>{inp.style.animation='';},300);
@@ -952,14 +981,17 @@ document.getElementById("btn-onboarding-next").addEventListener("click",()=>{
     let inst=selectedInstrument;
     if(inst==="Autre"){const autre=document.getElementById("onboarding-autre-input").value.trim();if(autre)inst=autre;}
     if(!inst){
-      // Secouer la grille si pas d'instrument
       const grid=document.getElementById("onboarding-instruments");
       grid.style.animation='shake 0.3s ease';
       setTimeout(()=>{grid.style.animation='';},300);
       return;
     }
     try{localStorage.setItem("chordbook-instrument",inst);}catch{}
+    try{localStorage.setItem("chordbook-tuto-seen","1");}catch{}
     updateWelcome();
+    hideOnboarding();
+    showToast("Bienvenue "+val+" ! 🎵");
+    return;
   }
   if(onboardingStep<ONBOARDING_STEPS.length-1){
     onboardingStep++;renderOnboardingStep();
@@ -1103,8 +1135,8 @@ document.addEventListener("click",()=>{ctxMenu.classList.remove("open");contextN
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){ctxMenu.classList.remove("open");contextNoteId=null;}});
 
 loadData();updateNotation();render();updateWelcome();showSplash();checkPrenom();checkFirstLaunch();
-checkOwnerFromURL();
 setTimeout(()=>checkImportFromURL(),2600);
+if(isPro()){const b=document.getElementById("btn-cours");if(b)b.classList.add("pro-active");}
 
 // ─── COURS PRO ────────────────────────────────────────────────────────────────
 
@@ -1116,37 +1148,41 @@ const COURS_DATA = [
     id:"c01", free:true, cat:"theorie",
     emoji:"🎵", label:"Théorie · Bases",
     title:"Les 7 notes de la gamme",
-    desc:"Comprendre Do Ré Mi Fa Sol La Si et leur équivalent international.",
-    duration:"3 min",
+    desc:"Comprendre Do Ré Mi Fa Sol La Si, les tons et les demi-tons.",
+    duration:"5 min",
     content:[
       {type:"hero",text:"🎵"},
       {type:"h1",text:"Les 7 notes de la gamme"},
-      {type:"sub",text:"Théorie · Débutant · 3 min"},
+      {type:"sub",text:"Théorie · Débutant · 5 min"},
       {type:"p",text:"La musique occidentale repose sur 7 notes fondamentales. En notation latine (utilisée en France) : Do, Ré, Mi, Fa, Sol, La, Si. En notation internationale : C, D, E, F, G, A, B."},
       {type:"h2",text:"Correspondances"},
       {type:"chords",chords:["Do = C","Ré = D","Mi = E","Fa = F","Sol = G","La = A","Si = B"]},
       {type:"tip",label:"Le saviez-vous ?",text:"La notation latine (Do Ré Mi) vient du XIe siècle, inventée par le moine Guido d'Arezzo pour faciliter l'apprentissage du chant."},
+      {type:"h2",text:"Les demi-tons et les tons"},
       {type:"h2",text:"Les demi-tons"},
-      {type:"p",text:"Entre certaines notes, il existe des demi-tons représentés par des dièses (#) ou des bémols (b). Par exemple, entre Do et Ré se trouve Do# (ou Réb). Il n'y a pas de demi-ton entre Mi-Fa et Si-Do."},
-      {type:"chords",chords:["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"],highlight:["C","D","E","F","G","A","B"]},
-      {type:"tip",label:"À retenir",text:"Le piano est le meilleur outil visuel pour comprendre les demi-tons : les touches noires sont les dièses/bémols, les blanches sont les notes naturelles."},
+      {type:"p",text:"La plus petite distance possible entre deux notes — deux touches directement voisines sur le piano."},
+      {type:"clickpiano",uid:"c01dt",mode:"demi"},
+      {type:"h2",text:"Les tons"},
+      {type:"p",text:"Un ton = 2 demi-tons. Il y a toujours une touche intermédiaire entre les deux notes."},
+      {type:"clickpiano",uid:"c01t",mode:"ton"},
+      {type:"tip",label:"À retenir",text:"Mi→Fa et Si→Do sont des demi-tons entre deux touches blanches — pas besoin de touche noire pour faire un demi-ton !"},
     ]
   },
   {
     id:"c02", free:true, cat:"progressions",
     emoji:"🔁", label:"Progression · Pop",
-    title:"La progression I–V–vi–IV",
+    title:"Les 4 accords magiques",
     desc:"La suite d'accords la plus populaire au monde. Des milliers de chansons l'utilisent.",
     duration:"5 min",
     prog:["C","G","Am","F"],
     content:[
       {type:"hero",text:"🔁"},
-      {type:"h1",text:"La progression I–V–vi–IV"},
+      {type:"h1",text:"Les 4 accords magiques"},
       {type:"sub",text:"Progressions · Débutant · 5 min"},
       {type:"p",text:"Cette progression est littéralement partout : Let Her Go, No Woman No Cry, Don't Stop Believin', Someone Like You... Elle fonctionne car elle crée un cycle harmonique satisfaisant qui revient naturellement au point de départ."},
       {type:"h2",text:"En Do majeur (C)"},
       {type:"prog",chords:["C","G","Am","F"]},
-      {type:"p",text:"Chaque chiffre romain correspond à un degré de la gamme. I = accord construit sur la 1re note, V = 5e note, vi = 6e note (mineur), IV = 4e note."},
+      {type:"p",text:"Chaque accord correspond à un degré de la gamme. 1er degré = accord de base (Do), 5e degré = tension (Sol), 6e degré mineur = couleur mélancolique (Lam), 4e degré = repos (Fa)."},
       {type:"h2",text:"Transpositions courantes"},
       {type:"diagram",title:"La même progression dans d'autres tonalités",rows:[
         {key:"Sol (G)",chords:["G","D","Em","C"]},
@@ -1154,6 +1190,12 @@ const COURS_DATA = [
         {key:"La (A)",chords:["A","E","F#m","D"]},
       ]},
       {type:"tip",label:"Exercice",text:"Prenez cette progression en Do et jouez-la en boucle. Essayez de reconnaître des chansons que vous connaissez. Vous serez surpris du résultat !"},
+      {type:"piano",uid:"c02",chords:[
+        {label:"Do",name:"Do (C)",white:["C","E","G"],black:[],degree:"1er degré — Tonique"},
+        {label:"Sol",name:"Sol (G)",white:["G","B","D"],black:[],degree:"5e degré — Dominante"},
+        {label:"Lam",name:"La mineur (Am)",white:["A","C","E"],black:[],degree:"6e degré — Relative mineure"},
+        {label:"Fa",name:"Fa (F)",white:["F","A","C"],black:[],degree:"4e degré — Sous-dominante"},
+      ]},
     ]
   },
   // ── PRO ──
@@ -1189,24 +1231,35 @@ const COURS_DATA = [
       {type:"h2",text:"Exemples"},
       {type:"chords",chords:["C (Do-Mi-Sol)","Cm (Do-Mib-Sol)","G (Sol-Si-Ré)","Gm (Sol-Sib-Ré)"]},
       {type:"tip",label:"À l'oreille",text:"Fermez les yeux et jouez un accord majeur, puis son équivalent mineur. Le majeur sonne 'lumineux', le mineur 'sombre' ou 'mélancolique'."},
+      {type:"piano",uid:"c04",chords:[
+        {label:"Do maj",name:"Do majeur (C)",white:["C","E","G"],black:[],degree:"Majeur — lumineux ☀️"},
+        {label:"Do min",name:"Do mineur (Cm)",white:["C","G"],black:["Ds"],degree:"Mineur — mélancolique 🌙"},
+        {label:"Sol maj",name:"Sol majeur (G)",white:["G","B","D"],black:[],degree:"Majeur — lumineux ☀️"},
+        {label:"Sol min",name:"Sol mineur (Gm)",white:["G","D"],black:["As"],degree:"Mineur — mélancolique 🌙"},
+      ]},
     ]
   },
   {
     id:"c05", free:false, cat:"progressions",
     emoji:"🎷", label:"Progression · Jazz",
-    title:"Le ii–V–I en Jazz",
+    title:"Le 2e–5e–1er degré en Jazz",
     desc:"La progression fondamentale du jazz. Indispensable pour comprendre l'harmonie jazz.",
     duration:"7 min",
     prog:["Dm7","G7","Cmaj7"],
     content:[
       {type:"hero",text:"🎷"},
-      {type:"h1",text:"Le ii–V–I Jazz"},
+      {type:"h1",text:"Le 2e–5e–1er degré Jazz"},
       {type:"sub",text:"Jazz · Intermédiaire · 7 min"},
-      {type:"p",text:"Le ii–V–I est la progression la plus importante du jazz. Elle crée une résolution harmonique puissante et apparaît dans quasiment tous les standards jazz."},
+      {type:"p",text:"Cette progression est la plus importante du jazz. Elle crée une résolution harmonique puissante et apparaît dans quasiment tous les standards jazz."},
       {type:"h2",text:"En Do majeur"},
       {type:"prog",chords:["Dm7","G7","Cmaj7"]},
-      {type:"p",text:"Dm7 = accord de 2e degré (ii), G7 = accord dominant du 5e degré (V), Cmaj7 = accord tonique du 1er degré (I). La tension créée par le G7 se résout naturellement sur le Cmaj7."},
+      {type:"p",text:"Dm7 = accord du 2e degré, G7 = accord du 5e degré (crée la tension), Cmaj7 = accord du 1er degré (résolution). La tension créée par le G7 se résout naturellement sur le Cmaj7."},
       {type:"tip",label:"Pour aller plus loin",text:"Essayez d'ajouter des extensions : Dm9, G13, Cmaj9. Plus vous empilez de notes, plus le son devient 'jazz'."},
+      {type:"piano",uid:"c05",chords:[
+        {label:"Dm7",name:"Ré mineur 7 (Dm7)",white:["D","F","A","C"],black:[],degree:"2e degré"},
+        {label:"G7",name:"Sol 7 (G7)",white:["G","B","D","F"],black:[],degree:"5e degré — Tension"},
+        {label:"Cmaj7",name:"Do majeur 7 (Cmaj7)",white:["C","E","G","B"],black:[],degree:"1er degré — Résolution"},
+      ]},
     ]
   },
   {
@@ -1268,7 +1321,12 @@ const COURS_DATA = [
 ];
 
 function isPro(){try{return localStorage.getItem("chordbook-pro")==="1";}catch{return false;}}
-function setPro(){try{localStorage.setItem("chordbook-pro","1");}catch{}}
+function setPro(){
+  try{localStorage.setItem("chordbook-pro","1");}catch{}
+  const btn=document.getElementById("btn-cours");
+  if(btn)btn.classList.add("pro-active");
+  showToast("🎓 Accès PRO activé !");
+}
 function isDone(id){try{const d=JSON.parse(localStorage.getItem("chordbook-done")||"{}");return !!d[id];}catch{return false;}}
 function markDone(id){try{const d=JSON.parse(localStorage.getItem("chordbook-done")||"{}");d[id]=1;localStorage.setItem("chordbook-done",JSON.stringify(d));}catch{}}
 let activeCoursTab="all";
@@ -1286,6 +1344,10 @@ function renderCours(){
   const free=filtered.filter(c=>c.free);
   const locked=filtered.filter(c=>!c.free);
   let html="";
+  if(!filtered.length){
+    html=`<div style="padding:40px 20px;text-align:center;color:var(--c4);font-size:13px;line-height:1.8;">Aucun cours dans cette catégorie<br>pour le moment.</div>`;
+    body.innerHTML=html;return;
+  }
   if(free.length){
     html+=`<div class="cours-section-title">Gratuit</div>`;
     html+=free.map(c=>coursCardHTML(c,pro)).join("");
@@ -1307,17 +1369,127 @@ function renderCours(){
   });
 }
 
+function getCourseBanner(id, locked){
+  const banners={
+    c01:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="35" width="8" height="50" rx="4" fill="#263747"/>
+      <rect x="36" y="25" width="8" height="60" rx="4" fill="#4A5C6A"/>
+      <rect x="52" y="40" width="8" height="45" rx="4" fill="#9BA4AB"/>
+      <rect x="68" y="15" width="8" height="70" rx="4" fill="#CCD6DF"/>
+      <rect x="84" y="30" width="8" height="55" rx="4" fill="#9BA4AB"/>
+      <rect x="100" y="45" width="8" height="40" rx="4" fill="#4A5C6A"/>
+      <rect x="116" y="20" width="8" height="65" rx="4" fill="#CCD6DF"/>
+      <rect x="132" y="35" width="8" height="50" rx="4" fill="#9BA4AB"/>
+      <rect x="148" y="25" width="8" height="60" rx="4" fill="#4A5C6A"/>
+      <rect x="164" y="40" width="8" height="45" rx="4" fill="#263747"/>
+      <rect x="180" y="18" width="8" height="67" rx="4" fill="#9BA4AB"/>
+      <rect x="196" y="30" width="8" height="55" rx="4" fill="#CCD6DF"/>
+      <rect x="212" y="22" width="8" height="63" rx="4" fill="#4A5C6A"/>
+      <rect x="228" y="38" width="8" height="47" rx="4" fill="#9BA4AB"/>
+      <rect x="244" y="28" width="8" height="57" rx="4" fill="#263747"/>
+      <text x="150" y="105" text-anchor="middle" font-size="9" fill="#2a9d8f" font-weight="700" font-family="-apple-system,Helvetica,sans-serif" letter-spacing="3">DO · RÉ · MI · FA · SOL · LA · SI</text>
+    </svg>`,
+    c02:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="55" r="38" fill="none" stroke="#263747" stroke-width="1.5"/>
+      <circle cx="150" cy="55" r="24" fill="none" stroke="#1a2d3d" stroke-width="1"/>
+      <circle cx="150" cy="55" r="5" fill="#2a9d8f"/>
+      <circle cx="150" cy="17" r="14" fill="#112130" stroke="#263747" stroke-width="1"/>
+      <text x="150" y="22" text-anchor="middle" font-size="10" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Do</text>
+      <circle cx="188" cy="55" r="14" fill="#112130" stroke="#263747" stroke-width="1"/>
+      <text x="188" y="59" text-anchor="middle" font-size="10" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Sol</text>
+      <circle cx="150" cy="93" r="14" fill="#112130" stroke="#263747" stroke-width="1"/>
+      <text x="150" y="97" text-anchor="middle" font-size="10" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Lam</text>
+      <circle cx="112" cy="55" r="14" fill="#112130" stroke="#263747" stroke-width="1"/>
+      <text x="112" y="59" text-anchor="middle" font-size="10" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Fa</text>
+      <path d="M150,31 A24,24 0 0,1 174,55" fill="none" stroke="#2a9d8f" stroke-width="2" opacity="0.8"/>
+      <path d="M174,55 A24,24 0 0,1 150,79" fill="none" stroke="#4895ef" stroke-width="2" opacity="0.8"/>
+      <path d="M150,79 A24,24 0 0,1 126,55" fill="none" stroke="#9b59b6" stroke-width="2" opacity="0.8"/>
+      <path d="M126,55 A24,24 0 0,1 150,31" fill="none" stroke="#e76f51" stroke-width="2" opacity="0.8"/>
+    </svg>`,
+    c03:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      ${[0,1,2,3,4,5,6].map((i)=>{
+        const x=20+i*38; const isHalf=i===2||i===6;
+        return `<rect x="${x}" y="${isHalf?50:35}" width="28" height="${isHalf?40:55}" rx="6" fill="${isHalf?'#263747':'#1a2d3d'}" stroke="${isHalf?'#4A5C6A':'#2a9d8f'}" stroke-width="1.2"/>
+        <text x="${x+14}" y="${isHalf?76:96}" text-anchor="middle" font-size="9" fill="${isHalf?'#4A5C6A':'#9BA4AB'}" font-weight="700" font-family="-apple-system,Helvetica,sans-serif">${['T','T','½','T','T','T','½'][i]}</text>`;
+      }).join('')}
+      <text x="150" y="15" text-anchor="middle" font-size="9" fill="#4A5C6A" font-weight="700" font-family="-apple-system,Helvetica,sans-serif" letter-spacing="2">GAMME MAJEURE</text>
+    </svg>`,
+    c04:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="110" height="70" rx="14" fill="#1a2d3d" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="75" y="48" text-anchor="middle" font-size="22" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">C</text>
+      <text x="75" y="68" text-anchor="middle" font-size="10" fill="#2a9d8f" font-weight="700" font-family="-apple-system,Helvetica,sans-serif">MAJEUR ☀️</text>
+      <rect x="170" y="20" width="110" height="70" rx="14" fill="#1a2d3d" stroke="#9b59b6" stroke-width="1.5"/>
+      <text x="225" y="48" text-anchor="middle" font-size="22" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Cm</text>
+      <text x="225" y="68" text-anchor="middle" font-size="10" fill="#9b59b6" font-weight="700" font-family="-apple-system,Helvetica,sans-serif">MINEUR 🌙</text>
+      <text x="150" y="62" text-anchor="middle" font-size="16" fill="#4A5C6A" font-family="-apple-system,Helvetica,sans-serif">↔</text>
+    </svg>`,
+    c05:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="30" width="72" height="50" rx="10" fill="#1a2d3d" stroke="#4895ef" stroke-width="1.5"/>
+      <text x="51" y="52" text-anchor="middle" font-size="13" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Dm7</text>
+      <text x="51" y="68" text-anchor="middle" font-size="8" fill="#4895ef" font-family="-apple-system,Helvetica,sans-serif">ii</text>
+      <text x="113" y="59" text-anchor="middle" font-size="18" fill="#263747" font-family="-apple-system,Helvetica,sans-serif">→</text>
+      <rect x="129" y="30" width="72" height="50" rx="10" fill="#1a2d3d" stroke="#e76f51" stroke-width="1.5"/>
+      <text x="165" y="52" text-anchor="middle" font-size="13" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">G7</text>
+      <text x="165" y="68" text-anchor="middle" font-size="8" fill="#e76f51" font-family="-apple-system,Helvetica,sans-serif">V ⚡</text>
+      <text x="227" y="59" text-anchor="middle" font-size="18" fill="#263747" font-family="-apple-system,Helvetica,sans-serif">→</text>
+      <rect x="243" y="30" width="50" height="50" rx="10" fill="#1a2d3d" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="268" y="52" text-anchor="middle" font-size="11" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Cmaj7</text>
+      <text x="268" y="68" text-anchor="middle" font-size="8" fill="#2a9d8f" font-family="-apple-system,Helvetica,sans-serif">I ✓</text>
+    </svg>`,
+    c06:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      ${[0,1,2,3,4,5,6,7,8,9,10,11].map((i)=>{
+        const x=15+i*23; const labels=['A7','','','','D7','','A7','','E7','D7','A7','E7'];
+        const colors=['#4895ef','#263747','#263747','#263747','#2a9d8f','#263747','#4895ef','#263747','#e76f51','#2a9d8f','#4895ef','#e76f51'];
+        return `<rect x="${x}" y="25" width="18" height="55" rx="5" fill="#1a2d3d" stroke="${colors[i]}" stroke-width="1.2"/>
+        <text x="${x+9}" y="57" text-anchor="middle" font-size="7" fill="${labels[i]?colors[i]:'#263747'}" font-weight="700" font-family="-apple-system,Helvetica,sans-serif" transform="rotate(-90,${x+9},57)">${labels[i]||''}</text>`;
+      }).join('')}
+      <text x="150" y="100" text-anchor="middle" font-size="8" fill="#4A5C6A" font-weight="700" font-family="-apple-system,Helvetica,sans-serif" letter-spacing="2">12 MESURES</text>
+    </svg>`,
+    c07:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30,80 Q80,20 150,55 Q220,90 270,30" fill="none" stroke="#2a9d8f" stroke-width="2" opacity="0.6"/>
+      <path d="M30,70 Q80,30 150,60 Q220,85 270,40" fill="none" stroke="#9b59b6" stroke-width="1.5" opacity="0.4"/>
+      <circle cx="75" cy="42" r="16" fill="#1a2d3d" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="75" y="46" text-anchor="middle" font-size="9" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Dmaj7</text>
+      <circle cx="150" cy="57" r="16" fill="#1a2d3d" stroke="#9b59b6" stroke-width="1.5"/>
+      <text x="150" y="55" text-anchor="middle" font-size="9" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">G#7</text>
+      <text x="150" y="66" text-anchor="middle" font-size="7" fill="#9b59b6" font-family="-apple-system,Helvetica,sans-serif">sub♭II</text>
+      <circle cx="225" cy="47" r="16" fill="#1a2d3d" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="225" y="51" text-anchor="middle" font-size="9" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Gmaj7</text>
+      <text x="150" y="12" text-anchor="middle" font-size="9" fill="#4A5C6A" font-weight="700" font-family="-apple-system,Helvetica,sans-serif" letter-spacing="2">BOSSA NOVA</text>
+    </svg>`,
+    c08:`<svg width="100%" height="100%" viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">
+      <rect x="25" y="20" width="55" height="70" rx="10" fill="#1a2d3d" stroke="#2a9d8f" stroke-width="1.5"/>
+      <text x="52" y="48" text-anchor="middle" font-size="12" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Cmaj7</text>
+      <text x="52" y="65" text-anchor="middle" font-size="8" fill="#2a9d8f" font-family="-apple-system,Helvetica,sans-serif">C·E·G·B</text>
+      <rect x="90" y="20" width="55" height="70" rx="10" fill="#1a2d3d" stroke="#9b59b6" stroke-width="1.5"/>
+      <text x="117" y="48" text-anchor="middle" font-size="12" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Cm7</text>
+      <text x="117" y="65" text-anchor="middle" font-size="8" fill="#9b59b6" font-family="-apple-system,Helvetica,sans-serif">C·Eb·G·Bb</text>
+      <rect x="155" y="20" width="55" height="70" rx="10" fill="#1a2d3d" stroke="#e76f51" stroke-width="1.5"/>
+      <text x="182" y="48" text-anchor="middle" font-size="12" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">C7</text>
+      <text x="182" y="65" text-anchor="middle" font-size="8" fill="#e76f51" font-family="-apple-system,Helvetica,sans-serif">C·E·G·Bb</text>
+      <rect x="220" y="20" width="55" height="70" rx="10" fill="#1a2d3d" stroke="#4A5C6A" stroke-width="1.5"/>
+      <text x="247" y="44" text-anchor="middle" font-size="10" fill="#CCD6DF" font-weight="800" font-family="-apple-system,Helvetica,sans-serif">Cm7b5</text>
+      <text x="247" y="62" text-anchor="middle" font-size="8" fill="#4A5C6A" font-family="-apple-system,Helvetica,sans-serif">C·Eb·Gb·Bb</text>
+    </svg>`,
+  };
+  return banners[id]||`<svg width="100%" height="100%" viewBox="0 0 300 110"><text x="150" y="60" text-anchor="middle" font-size="32" fill="#263747">${'🎵'}</text></svg>`;
+}
+
 function coursCardHTML(c,pro){
   const locked=!c.free&&!pro;
   const done=isDone(c.id);
   const badge=locked
     ?`<div class="cours-lock-badge"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> PRO</div>`
     :done?`<div class="cours-done-badge">✓ Vu</div>`:`<div class="cours-free-badge">Gratuit</div>`;
+  const bannerBg=locked?'background:linear-gradient(135deg,#0a1e2c 0%,#112130 100%)':'background:linear-gradient(135deg,#0d2235 0%,#112130 100%)';
   return `<div class="cours-card${locked?' locked':''}" data-id="${c.id}">
+    <div class="cours-card-banner" style="${bannerBg}">
+      ${getCourseBanner(c.id, locked)}
+      ${locked?`<div class="cours-banner-pro-badge">PRO</div>`:''}
+    </div>
     <div class="cours-card-top">
-      <div class="cours-card-emoji">${c.emoji}</div>
       <div class="cours-card-info">
-        <div class="cours-card-label">${c.label}${locked?'<span class="pro-badge" style="font-size:7px;padding:2px 7px;">PRO</span>':''}</div>
+        <div class="cours-card-label">${c.label}</div>
         <div class="cours-card-title">${c.title}</div>
         <div class="cours-card-desc">${c.desc}</div>
       </div>
@@ -1349,6 +1521,137 @@ function openReader(lesson){
     else if(block.type==="tip"){
       html+=`<div class="reader-tip"><div class="reader-tip-label">${block.label}</div><p>${block.text}</p></div>`;
     }
+    else if(block.type==="arrowpiano"){
+      const uid=block.uid||'ap';
+      const mode=block.mode||'all';
+      const allSteps=[
+        {l:"Do→Ré", t:"ton",  info:"Do → Do# → Ré",  sub:"1 ton = 2 demi-tons. Touche noire (Do#) entre les deux."},
+        {l:"Ré→Mi", t:"ton",  info:"Ré → Ré# → Mi",  sub:"1 ton = 2 demi-tons. Touche noire (Ré#) entre les deux."},
+        {l:"Mi→Fa", t:"demi", info:"Mi → Fa",         sub:"½ ton — demi-ton entre deux touches blanches. Pas de touche noire."},
+        {l:"Fa→Sol",t:"ton",  info:"Fa → Fa# → Sol",  sub:"1 ton = 2 demi-tons. Touche noire (Fa#) entre les deux."},
+        {l:"Sol→La",t:"ton",  info:"Sol → Sol# → La", sub:"1 ton = 2 demi-tons. Touche noire (Sol#) entre les deux."},
+        {l:"La→Si", t:"ton",  info:"La → La# → Si",   sub:"1 ton = 2 demi-tons. Touche noire (La#) entre les deux."},
+        {l:"Si→Do", t:"demi", info:"Si → Do",          sub:"½ ton — demi-ton entre deux touches blanches. Pas de touche noire."},
+      ];
+      const steps=mode==="demi"?allSteps.filter(s=>s.t==="demi"):mode==="ton"?allSteps.filter(s=>s.t==="ton"):allSteps;
+      const label=mode==="demi"?"Les demi-tons — touches directement voisines":mode==="ton"?"Les tons — 2 demi-tons de distance":"Tous les intervalles";
+      html+=`<div class="reader-piano-wrap">
+        <div class="reader-piano-label">${label}</div>
+        <div class="ap-btns" id="apbtns-${uid}">
+          ${steps.map((s,i)=>`<button class="ap-btn${s.t==='demi'?' ap-demi':''}${i===0?' active':''}" onclick="showAP('${uid}',${i})">${s.l}</button>`).join('')}
+        </div>
+        <div class="ap-info" id="apinfo-${uid}">${steps[0].info}</div>
+        <div class="ap-sub" id="apsub-${uid}">${steps[0].sub}</div>
+        <svg viewBox="0 0 280 125" width="100%" xmlns="http://www.w3.org/2000/svg" id="apsvg-${uid}">
+          <defs><marker id="ah-${uid}" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><polygon points="0 0,4 2,0 4" fill="#e76f51" id="ahp-${uid}"/></marker></defs>
+          <text id="apt-${uid}" x="116" y="12" text-anchor="middle" font-size="8" fill="#e76f51" font-weight="800" font-family="-apple-system,Helvetica">½ ton</text>
+          <path id="apl-${uid}" d="M97 42 Q116 22 136 42" fill="none" stroke="#e76f51" stroke-width="2" marker-end="url(#ah-${uid})"/>
+          <rect id="ap-wC-${uid}" x="1"   y="44" width="36" height="68" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2"/>
+          <rect id="ap-wD-${uid}" x="40"  y="44" width="36" height="68" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2"/>
+          <rect id="ap-wE-${uid}" x="79"  y="44" width="36" height="68" rx="6" fill="#0d2a28" stroke="#e76f51" stroke-width="2"/>
+          <rect id="ap-wF-${uid}" x="118" y="44" width="36" height="68" rx="6" fill="#0d2a28" stroke="#e76f51" stroke-width="2"/>
+          <rect id="ap-wG-${uid}" x="157" y="44" width="36" height="68" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2"/>
+          <rect id="ap-wA-${uid}" x="196" y="44" width="36" height="68" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2"/>
+          <rect id="ap-wB-${uid}" x="235" y="44" width="36" height="68" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2"/>
+          <rect id="ap-bCs-${uid}" x="28"  y="44" width="22" height="40" rx="5" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="ap-bDs-${uid}" x="67"  y="44" width="22" height="40" rx="5" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="ap-bFs-${uid}" x="145" y="44" width="22" height="40" rx="5" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="ap-bGs-${uid}" x="184" y="44" width="22" height="40" rx="5" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="ap-bAs-${uid}" x="223" y="44" width="22" height="40" rx="5" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <text x="39"  y="77" text-anchor="middle" font-size="5" fill="#4a6880" font-family="-apple-system,Helvetica">Do#</text>
+          <text x="78"  y="77" text-anchor="middle" font-size="5" fill="#4a6880" font-family="-apple-system,Helvetica">Ré#</text>
+          <text x="156" y="77" text-anchor="middle" font-size="5" fill="#4a6880" font-family="-apple-system,Helvetica">Fa#</text>
+          <text x="195" y="77" text-anchor="middle" font-size="5" fill="#4a6880" font-family="-apple-system,Helvetica">Sol#</text>
+          <text x="234" y="77" text-anchor="middle" font-size="5" fill="#4a6880" font-family="-apple-system,Helvetica">La#</text>
+          <text x="19"  y="121" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica">Do</text>
+          <text x="58"  y="121" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica">Ré</text>
+          <text x="97"  y="121" text-anchor="middle" font-size="7" fill="#e76f51" font-family="-apple-system,Helvetica">Mi</text>
+          <text x="136" y="121" text-anchor="middle" font-size="7" fill="#e76f51" font-family="-apple-system,Helvetica">Fa</text>
+          <text x="175" y="121" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica">Sol</text>
+          <text x="214" y="121" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica">La</text>
+          <text x="253" y="121" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica">Si</text>
+        </svg>
+        <span style="display:none" id="apsteps-${uid}">${btoa(unescape(encodeURIComponent(JSON.stringify(steps))))}</span>
+      </div>`;
+    }
+    else if(block.type==="clickpiano"){
+      const uid=block.uid||'cp';
+      const mode=block.mode||'demi';
+      const col=mode==="demi"?"#e76f51":"#2a9d8f";
+      const steps=mode==="demi"?1:2;
+      const label=mode==="demi"?"Sélectionnez une note":"Sélectionnez une note";
+      const markerColor=mode==="demi"?"e76f51":"2a9d8f";
+      html+=`<div class="reader-piano-wrap">
+        <div class="reader-piano-label">${label}</div>
+        <div class="cp-info" id="cpinfo-${uid}"></div>
+        <div class="cp-sub" id="cpsub-${uid}"></div>
+        <svg viewBox="0 0 360 140" width="100%" xmlns="http://www.w3.org/2000/svg" id="cpsvg-${uid}">
+          <defs><marker id="cpah-${uid}" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><polygon points="0 0,4 2,0 4" fill="#${markerColor}"/></marker></defs>
+          <path id="cparc-${uid}" d="M0 0 Q0 0 0 0" fill="none" stroke="${col}" stroke-width="2" marker-end="url(#cpah-${uid})" opacity="0"/>
+          <text id="cplbl-${uid}" x="0" y="0" text-anchor="middle" font-size="7" fill="${col}" font-weight="800" font-family="-apple-system,Helvetica" opacity="0">${mode==="demi"?"½ ton":"1 ton"}</text>
+          <rect class="cpwkey-${uid}" data-note="C"  x="1"   y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="D"  x="45"  y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="E"  x="89"  y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="F"  x="133" y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="G"  x="177" y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="A"  x="221" y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect class="cpwkey-${uid}" data-note="B"  x="265" y="36" width="40" height="82" rx="6" fill="#8aafc4" stroke="#5a7a90" stroke-width="1.2" style="cursor:pointer"/>
+          <rect id="cpghost-${uid}" x="312" y="36" width="40" height="82" rx="6" fill="#0d2a28" stroke="${col}" stroke-width="2" opacity="0"/>
+          <text id="cpghostlbl-${uid}" x="332" y="127" text-anchor="middle" font-size="7" fill="${col}" font-family="-apple-system,Helvetica" opacity="0">Do</text>
+          <rect class="cpbkey-${uid}" data-note="Cs" x="33"  y="36" width="24" height="50" rx="5" fill="#162535" stroke="#263747" stroke-width="1" style="cursor:pointer"/>
+          <rect class="cpbkey-${uid}" data-note="Ds" x="77"  y="36" width="24" height="50" rx="5" fill="#162535" stroke="#263747" stroke-width="1" style="cursor:pointer"/>
+          <rect class="cpbkey-${uid}" data-note="Fs" x="165" y="36" width="24" height="50" rx="5" fill="#162535" stroke="#263747" stroke-width="1" style="cursor:pointer"/>
+          <rect class="cpbkey-${uid}" data-note="Gs" x="209" y="36" width="24" height="50" rx="5" fill="#162535" stroke="#263747" stroke-width="1" style="cursor:pointer"/>
+          <rect class="cpbkey-${uid}" data-note="As" x="253" y="36" width="24" height="50" rx="5" fill="#162535" stroke="#263747" stroke-width="1" style="cursor:pointer"/>
+          <text x="45"  y="80" text-anchor="middle" font-size="5.5" fill="#4a6880" font-family="-apple-system,Helvetica" style="pointer-events:none">Do#</text>
+          <text x="89"  y="80" text-anchor="middle" font-size="5.5" fill="#4a6880" font-family="-apple-system,Helvetica" style="pointer-events:none">Ré#</text>
+          <text x="177" y="80" text-anchor="middle" font-size="5.5" fill="#4a6880" font-family="-apple-system,Helvetica" style="pointer-events:none">Fa#</text>
+          <text x="221" y="80" text-anchor="middle" font-size="5.5" fill="#4a6880" font-family="-apple-system,Helvetica" style="pointer-events:none">Sol#</text>
+          <text x="265" y="80" text-anchor="middle" font-size="5.5" fill="#4a6880" font-family="-apple-system,Helvetica" style="pointer-events:none">La#</text>
+          <text x="21"  y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Do</text>
+          <text x="65"  y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Ré</text>
+          <text x="109" y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Mi</text>
+          <text x="153" y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Fa</text>
+          <text x="197" y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Sol</text>
+          <text x="241" y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">La</text>
+          <text x="285" y="127" text-anchor="middle" font-size="7" fill="#a0bbc8" font-family="-apple-system,Helvetica" style="pointer-events:none">Si</text>
+        </svg>
+        <span style="display:none" id="cpmode-${uid}">${mode}</span>
+      </div>`;
+    }
+    else if(block.type==="piano"){
+      const uid=block.uid||'main';
+      const chordsB64=btoa(unescape(encodeURIComponent(JSON.stringify(block.chords||[]))));
+      html+=`<div class="reader-piano-wrap">
+        <div class="reader-piano-label">Visualiseur d'accords</div>
+        <div class="piano-chord-btns" id="pcbtns-${uid}"></div>
+        <div class="piano-cname" id="pcname-${uid}">—</div>
+        <div class="piano-cnotes" id="pcnotes-${uid}"></div>
+        <svg viewBox="0 0 350 130" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect id="pwC-${uid}"  x="1"   y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwD-${uid}"  x="52"  y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwE-${uid}"  x="103" y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwF-${uid}"  x="154" y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwG-${uid}"  x="205" y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwA-${uid}"  x="256" y="1" width="47" height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pwB-${uid}"  x="307" y="1" width="46"  height="118" rx="8" fill="#6a8aa0" stroke="#4a6880" stroke-width="1.5"/>
+          <rect id="pbCs-${uid}" x="36"  y="1" width="28" height="74" rx="6" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="pbDs-${uid}" x="87"  y="1" width="28" height="74" rx="6" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="pbFs-${uid}" x="189" y="1" width="28" height="74" rx="6" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="pbGs-${uid}" x="240" y="1" width="28" height="74" rx="6" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <rect id="pbAs-${uid}" x="291" y="1" width="28" height="74" rx="6" fill="#0a1520" stroke="#1a2d3d" stroke-width="1"/>
+          <text id="ptDo-${uid}"  x="24"  y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Do</text>
+          <text id="ptRe-${uid}"  x="75"  y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Ré</text>
+          <text id="ptMi-${uid}"  x="126" y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Mi</text>
+          <text id="ptFa-${uid}"  x="177" y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Fa</text>
+          <text id="ptSol-${uid}" x="228" y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Sol</text>
+          <text id="ptLa-${uid}"  x="279" y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">La</text>
+          <text id="ptSi-${uid}"  x="330" y="128" text-anchor="middle" font-size="9" fill="#a0bbc8" font-family="-apple-system,Helvetica">Si</text>
+        </svg>
+        <div class="piano-degree" id="pdeg-${uid}"></div>
+        <span style="display:none" id="pdata-${uid}">${chordsB64}</span>
+      </div>`;
+    }
     else if(block.type==="diagram"){
       const rows=(block.rows||[]).map(r=>`<div style="margin-bottom:10px;"><div style="font-size:10px;color:var(--c4);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:6px;">${r.key}</div><div class="reader-prog">${r.chords.map((c,i)=>`<div class="reader-prog-chord" style="font-size:12px;padding:6px 10px;">${c}</div>${i<r.chords.length-1?'<div class="reader-prog-arrow">›</div>':''}`).join("")}</div></div>`).join("");
       html+=`<div class="reader-diagram"><div class="reader-diagram-title">${block.title}</div>${rows}</div>`;
@@ -1362,12 +1665,29 @@ function openReader(lesson){
     ${hasProg?`<button id="btn-import-prog">Importer la progression dans mon carnet</button>`:''}
   </div>`;
   body.innerHTML=html;
+  initPianos();
+  initClickPianos();
+  // Init arrow pianos
+  document.querySelectorAll("[id^='apsteps-']").forEach(el=>{
+    const uid=el.id.replace("apsteps-","");
+    showAP(uid,0);
+  });
   document.getElementById("reader-overlay").classList.add("open");
   body.scrollTop=0;
+  // Progress bar
+  const pb=document.getElementById("reader-progress-bar");
+  if(pb){pb.style.width="0%";}
+  body.addEventListener("scroll",()=>{
+    const pb=document.getElementById("reader-progress-bar");
+    if(!pb)return;
+    const pct=body.scrollTop/(body.scrollHeight-body.clientHeight)*100;
+    pb.style.width=Math.min(pct,100)+"%";
+  });
 
   document.getElementById("btn-mark-done").addEventListener("click",()=>{
     markDone(lesson.id);
     document.getElementById("btn-mark-done").textContent="✓ Cours terminé";
+    showToast("✓ Cours marqué comme terminé");
     renderCours();
   });
   if(hasProg){
@@ -1389,13 +1709,211 @@ function checkOwnerFromURL(){
       setPro();
       window.history.replaceState({},'',window.location.pathname);
       const btn=document.getElementById("btn-cours");
-      if(btn){btn.textContent="🎓 Cours";} 
+      if(btn){btn.textContent="🎓 Cours";}
     }
   }catch{}
 }
+checkOwnerFromURL();
 
 
 function hidePaywall(){document.getElementById("paywall-overlay").classList.remove("open");}
+
+function showAP(uid, i){
+  const dataEl=document.getElementById("apsteps-"+uid);
+  if(!dataEl)return;
+  let steps=[];
+  try{steps=JSON.parse(decodeURIComponent(escape(atob(dataEl.textContent))));}catch{return;}
+  const s=steps[i];if(!s)return;
+  const col=s.t==="ton"?"#2a9d8f":"#e76f51";
+  const WMAP={C:{id:"ap-wC",x:19},D:{id:"ap-wD",x:58},E:{id:"ap-wE",x:97},F:{id:"ap-wF",x:136},G:{id:"ap-wG",x:175},A:{id:"ap-wA",x:214},B:{id:"ap-wB",x:253}};
+  const BMAP={Cs:{id:"ap-bCs"},Ds:{id:"ap-bDs"},Fs:{id:"ap-bFs"},Gs:{id:"ap-bGs"},As:{id:"ap-bAs"}};
+  const WLIT={C:["Si→Do"],D:["Do→Ré","Ré→Mi"],E:["Ré→Mi","Mi→Fa"],F:["Mi→Fa","Fa→Sol"],G:["Fa→Sol","Sol→La"],A:["Sol→La","La→Si"],B:["La→Si","Si→Do"]};
+  const BLIT={Cs:["Do→Ré"],Ds:["Ré→Mi"],Fs:["Fa→Sol"],Gs:["Sol→La"],As:["La→Si"]};
+  const lbl=s.l;
+
+  document.querySelectorAll("#apbtns-"+uid+" .ap-btn").forEach((b,j)=>b.classList.toggle("active",j===i));
+  const infoEl=document.getElementById("apinfo-"+uid);const subEl=document.getElementById("apsub-"+uid);
+  if(infoEl)infoEl.textContent=s.info;if(subEl)subEl.textContent=s.sub;
+
+  Object.entries(WMAP).forEach(([k,v])=>{
+    const el=document.getElementById(v.id+"-"+uid);if(!el)return;
+    const lit=(WLIT[k]||[]).includes(lbl);
+    el.setAttribute("fill",lit?"#0d2a28":"#8aafc4");
+    el.setAttribute("stroke",lit?col:"#5a7a90");
+    el.setAttribute("stroke-width",lit?"2":"1.2");
+  });
+  Object.entries(BMAP).forEach(([k,v])=>{
+    const el=document.getElementById(v.id+"-"+uid);if(!el)return;
+    const lit=(BLIT[k]||[]).includes(lbl);
+    el.setAttribute("fill",lit?"#0d2a28":"#0a1520");
+    el.setAttribute("stroke",lit?col:"#1a2d3d");
+    el.setAttribute("stroke-width",lit?"1.8":"1");
+  });
+
+  const svg=document.getElementById("apsvg-"+uid);
+  if(svg){
+    svg.querySelectorAll("text[y='121']").forEach(t=>{
+      const x=parseFloat(t.getAttribute("x"));
+      const k=Object.entries(WMAP).find(([k,v])=>Math.abs(v.x-x)<3)?.[0];
+      if(k) t.setAttribute("fill",(WLIT[k]||[]).includes(lbl)?col:"#a0bbc8");
+    });
+  }
+
+  const ARROWS={
+    "Do→Ré":{x1:19,x2:58,mx:38,lbl:"1 ton"},"Ré→Mi":{x1:58,x2:97,mx:77,lbl:"1 ton"},
+    "Mi→Fa":{x1:97,x2:136,mx:116,lbl:"½ ton"},"Fa→Sol":{x1:136,x2:175,mx:155,lbl:"1 ton"},
+    "Sol→La":{x1:175,x2:214,mx:194,lbl:"1 ton"},"La→Si":{x1:214,x2:253,mx:233,lbl:"1 ton"},
+    "Si→Do":{x1:253,x2:19,mx:136,lbl:"½ ton"}
+  };
+  const arrow=ARROWS[lbl]||ARROWS["Mi→Fa"];
+  const path=document.getElementById("apl-"+uid);
+  const txt=document.getElementById("apt-"+uid);
+  const poly=document.getElementById("ahp-"+uid);
+  const arcH=lbl==="Si→Do"?-50:-20;
+  if(path){
+    path.setAttribute("d",`M${arrow.x1} 42 Q${arrow.mx} ${42+arcH} ${arrow.x2} 42`);
+    path.setAttribute("stroke",col);
+  }
+  if(txt){txt.setAttribute("x",String(arrow.mx));txt.setAttribute("y",String(42+arcH-4));txt.setAttribute("fill",col);txt.textContent=arrow.lbl;}
+  if(poly)poly.setAttribute("fill",col);
+}
+
+function initClickPianos(){
+  const NOTES=["C","Cs","D","Ds","E","F","Fs","G","Gs","A","As","B"];
+  const NAMES={C:"Do",Cs:"Do#",D:"Ré",Ds:"Ré#",E:"Mi",F:"Fa",Fs:"Fa#",G:"Sol",Gs:"Sol#",A:"La",As:"La#",B:"Si"};
+  const CX={C:21,Cs:45,D:65,Ds:89,E:109,F:153,Fs:177,G:197,Gs:221,A:241,As:265,B:285};
+
+  document.querySelectorAll("[id^='cpmode-']").forEach(el=>{
+    const uid=el.id.replace("cpmode-","");
+    const mode=el.textContent.trim();
+    const steps=mode==="demi"?1:2;
+    const col=mode==="demi"?"#e76f51":"#2a9d8f";
+    const lbl=mode==="demi"?"½ ton":"1 ton";
+
+    function resetCP(){
+      document.querySelectorAll(`.cpwkey-${uid}`).forEach(k=>{k.setAttribute("fill","#8aafc4");k.setAttribute("stroke","#5a7a90");k.setAttribute("stroke-width","1.2");});
+      document.querySelectorAll(`.cpbkey-${uid}`).forEach(k=>{k.setAttribute("fill","#162535");k.setAttribute("stroke","#263747");k.setAttribute("stroke-width","1");});
+      document.getElementById("cparc-"+uid).setAttribute("opacity","0");
+      document.getElementById("cplbl-"+uid).setAttribute("opacity","0");
+      const g=document.getElementById("cpghost-"+uid);const gl=document.getElementById("cpghostlbl-"+uid);
+      if(g){g.setAttribute("opacity","0");}if(gl){gl.setAttribute("opacity","0");}
+      const g2=document.getElementById("cpghost2-"+uid);const g2l=document.getElementById("cpghost2lbl-"+uid);
+      if(g2)g2.setAttribute("opacity","0");if(g2l)g2l.setAttribute("opacity","0");
+    }
+
+    function lightCP(note,c){
+      const k=document.querySelector(`[data-note="${note}"].cpwkey-${uid},.cpbkey-${uid}[data-note="${note}"]`);
+      if(k){k.setAttribute("fill","#0d2a28");k.setAttribute("stroke",c);k.setAttribute("stroke-width","2");}
+    }
+
+    function selectNote(note){
+      resetCP();
+      const ni=NOTES.indexOf(note);
+      const next=NOTES[(ni+steps)%12];
+      lightCP(note,"#CCD6DF");
+      const arc=document.getElementById("cparc-"+uid);
+      const txt=document.getElementById("cplbl-"+uid);
+      const x1=CX[note]||21;
+      const x2=CX[next]||65;
+      const isWrap=x2<x1;
+      if(isWrap && mode==="demi"){
+        const g=document.getElementById("cpghost-"+uid);
+        const gl=document.getElementById("cpghostlbl-"+uid);
+        if(g)setTimeout(()=>g.setAttribute("opacity","1"),50);
+        if(gl)setTimeout(()=>gl.setAttribute("opacity","1"),50);
+        const gx=332; const mid=(x1+gx)/2;
+        if(arc){arc.setAttribute("d",`M${x1} 36 Q${mid} 16 ${gx} 36`);arc.setAttribute("opacity","1");}
+        if(txt){txt.setAttribute("x",String(mid));txt.setAttribute("y","12");txt.setAttribute("opacity","1");txt.textContent=lbl;}
+      } else if(isWrap && mode==="ton"){
+        const g=document.getElementById("cpghost-"+uid);
+        const gl=document.getElementById("cpghostlbl-"+uid);
+        // Show ghost Do (white) + Do# (black) on the right
+        if(g){g.setAttribute("width","40");g.setAttribute("height","82");g.setAttribute("x","312");g.setAttribute("y","36");g.setAttribute("rx","6");g.setAttribute("fill","#1a2d3d");g.setAttribute("stroke","#4a6880");g.setAttribute("stroke-width","1.2");setTimeout(()=>g.setAttribute("opacity","0.5"),50);}
+        if(gl){gl.setAttribute("x","332");gl.setAttribute("fill","#4a6880");gl.textContent="Do";setTimeout(()=>gl.setAttribute("opacity","0.5"),50);}
+        // Add Do# ghost on top
+        const svg=document.getElementById("cpsvg-"+uid);
+        if(svg){
+          let ds=document.getElementById("cpghost2-"+uid);
+          if(!ds){ds=document.createElementNS("http://www.w3.org/2000/svg","rect");ds.id="cpghost2-"+uid;svg.appendChild(ds);}
+          ds.setAttribute("x","320");ds.setAttribute("y","36");ds.setAttribute("width","24");ds.setAttribute("height","50");ds.setAttribute("rx","5");ds.setAttribute("fill","#0d2a28");ds.setAttribute("stroke",col);ds.setAttribute("stroke-width","2");
+          let dsl=document.getElementById("cpghost2lbl-"+uid);
+          if(!dsl){dsl=document.createElementNS("http://www.w3.org/2000/svg","text");dsl.id="cpghost2lbl-"+uid;dsl.setAttribute("text-anchor","middle");dsl.setAttribute("font-size","7");dsl.setAttribute("font-family","-apple-system,Helvetica");svg.appendChild(dsl);}
+          dsl.setAttribute("x","332");dsl.setAttribute("y","127");dsl.setAttribute("fill",col);dsl.textContent="Do#";
+          setTimeout(()=>{ds.setAttribute("opacity","1");dsl.setAttribute("opacity","1");},50);
+        }
+        const gx=332; const mid=(x1+gx)/2;
+        if(arc){arc.setAttribute("d",`M${x1} 36 Q${mid} 16 ${gx} 36`);arc.setAttribute("opacity","1");}
+        if(txt){txt.setAttribute("x",String(mid));txt.setAttribute("y","12");txt.setAttribute("opacity","1");txt.textContent=lbl;}
+      } else {
+        lightCP(next,col);
+        const mid=(x1+x2)/2;
+        const h=x2-x1<80?-18:-28;
+        if(arc){arc.setAttribute("d",`M${x1} 36 Q${mid} ${36+h} ${x2} 36`);arc.setAttribute("opacity","1");}
+        if(txt){txt.setAttribute("x",String(mid));txt.setAttribute("y",String(Math.max(36+h-5,8)));txt.setAttribute("opacity","1");txt.textContent=lbl;}
+      }
+      const info=document.getElementById("cpinfo-"+uid);
+      const sub=document.getElementById("cpsub-"+uid);
+      if(info){info.textContent=`${NAMES[note]} → ${NAMES[next]}`;info.style.color=col;}
+      if(sub)sub.textContent=`${lbl} depuis ${NAMES[note]}`;
+    }
+
+    document.querySelectorAll(`.cpwkey-${uid},.cpbkey-${uid}`).forEach(k=>{
+      k.addEventListener("click",()=>selectNote(k.dataset.note));
+    });
+  });
+}
+
+function initPianos(){
+  const NOTE_LABEL={"C":"Do","D":"Ré","E":"Mi","F":"Fa","G":"Sol","A":"La","B":"Si"};
+  const WHITE_IDS=["pwC","pwD","pwE","pwF","pwG","pwA","pwB"];
+  const BLACK_IDS=["pbCs","pbDs","pbFs","pbGs","pbAs"];
+  const TEXT_MAP={"Do":"ptDo","Ré":"ptRe","Mi":"ptMi","Fa":"ptFa","Sol":"ptSol","La":"ptLa","Si":"ptSi"};
+
+  document.querySelectorAll("[id^='pdata-']").forEach(el=>{
+    const uid=el.id.replace("pdata-","");
+    let chords=[];
+    try{chords=JSON.parse(decodeURIComponent(escape(atob(el.textContent))));}catch{return;}
+    const btnsEl=document.getElementById("pcbtns-"+uid);
+    if(!btnsEl)return;
+    chords.forEach((c,i)=>{
+      const b=document.createElement("button");
+      b.className="piano-chord-btn"+(i===0?" active":"");
+      b.textContent=c.label;
+      b.onclick=()=>showPianoChord(uid,chords,i,btnsEl);
+      btnsEl.appendChild(b);
+    });
+    showPianoChord(uid,chords,0,btnsEl);
+  });
+
+  function showPianoChord(uid,chords,i,btnsEl){
+    const c=chords[i];
+    btnsEl.querySelectorAll(".piano-chord-btn").forEach((b,j)=>b.classList.toggle("active",j===i));
+    const cname=document.getElementById("pcname-"+uid);
+    const cnotes=document.getElementById("pcnotes-"+uid);
+    const pdeg=document.getElementById("pdeg-"+uid);
+    if(cname)cname.textContent=c.name||"";
+    if(cnotes)cnotes.textContent=(c.white||[]).map(k=>NOTE_LABEL[k]||k).join(" · ");
+    if(pdeg)pdeg.textContent=c.degree||"";
+    WHITE_IDS.forEach(id=>{
+      const el=document.getElementById(id+"-"+uid);if(!el)return;
+      const lit=(c.white||[]).includes(id.replace("pw",""));
+      el.setAttribute("fill",lit?"#0d2a28":"#6a8aa0");
+      el.setAttribute("stroke",lit?"#2a9d8f":"#4a6880");
+      el.setAttribute("stroke-width",lit?"2.5":"1.5");
+    });
+    BLACK_IDS.forEach(id=>{
+      const el=document.getElementById(id+"-"+uid);if(!el)return;
+      const lit=(c.black||[]).includes(id.replace("pb",""));
+      el.setAttribute("fill",lit?"#0d2a28":"#0a1520");
+      el.setAttribute("stroke",lit?"#2a9d8f":"#1a2d3d");
+    });
+    Object.entries(TEXT_MAP).forEach(([note,tid])=>{
+      const el=document.getElementById(tid+"-"+uid);if(!el)return;
+      const key=Object.entries(NOTE_LABEL).find(([k,v])=>v===note)?.[0];
+      el.setAttribute("fill",key&&(c.white||[]).includes(key)?"#2a9d8f":"#a0bbc8");
+    });
+  }
+}
 
 // Cours events
 document.getElementById("btn-cours").addEventListener("click",()=>{
@@ -1415,6 +1933,7 @@ document.querySelectorAll(".cours-tab").forEach(tab=>{
 
 // Paywall
 document.getElementById("btn-paywall-buy").addEventListener("click",()=>{
+  // 👉 Remplace ce lien par ton vrai lien Stripe ou Gumroad
   window.open("https://gumroad.com","_blank");
 });
 document.getElementById("btn-paywall-close").addEventListener("click",hidePaywall);
@@ -1432,9 +1951,6 @@ document.getElementById("btn-paywall-validate").addEventListener("click",()=>{
     document.getElementById("paywall-code-row").classList.remove("open");
     errEl.style.display="none";
     renderCours();
-    // Show success flash
-    const btn=document.getElementById("btn-cours");
-    const orig=btn.textContent;btn.textContent="🎓 PRO activé !";setTimeout(()=>{btn.textContent="🎓 Cours";},2000);
   } else {
     errEl.style.display="block";
     document.getElementById("paywall-code-input").style.borderColor="#e05555";
